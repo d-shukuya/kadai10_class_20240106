@@ -1,5 +1,6 @@
 <?php
-// 1. funcs.php を呼び出す
+// 0. インポート
+session_start();
 include("./funcs.php");
 
 // 2. 変数定義
@@ -13,26 +14,16 @@ $pdo = db_conn();
 // 4．データ登録
 $stmt;
 if ($type == 'books') {
-    $stmt = $pdo->prepare(
-        'UPDATE
-            gs_bm_order
-        SET
-            `order` = :order
-        WHERE
-            `type` = :type'
-    );
+    $sql = "UPDATE gs_bm_order SET `order` = :order WHERE `type` = :type AND owner_id = :lId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':order', $order, PDO::PARAM_STR);
     $stmt->bindValue(':type', $type, PDO::PARAM_STR);
-    $stmt->bindValue(':order', $order, PDO::PARAM_STR);
+    $stmt->bindValue(':lId', $_SESSION["id"], PDO::PARAM_INT);
 } else {
-    $stmt = $pdo->prepare(
-        'UPDATE
-            gs_bm_order
-        SET
-            `order` = :order
-        WHERE
-            book_id = :book_id'
-    );
+    $sql = "UPDATE gs_bm_order SET `order` = :order WHERE `type` = :type AND book_id = :book_id";
+    $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':order', $order, PDO::PARAM_STR);
+    $stmt->bindValue(':type', $type, PDO::PARAM_STR);
     $stmt->bindValue(':book_id', $book_id, PDO::PARAM_INT);
 }
 

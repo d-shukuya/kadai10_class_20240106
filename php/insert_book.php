@@ -1,20 +1,17 @@
 <?php
-// 1. funcs.php を呼び出す
+// 1. インポート
+session_start();
 include("./funcs.php");
 
 // 2．データ登録
 // 2-1. Books の登録
 $pdo = db_conn();
-$stmt = $pdo->prepare(
-    'INSERT INTO
-        gs_bm_books(id, name, url, content, created_date, update_date)
-    VALUES
-        (NULL, :name, :url, "", sysdate(), sysdate())'
-);
-
+$sql = "INSERT INTO gs_bm_books(id, name, url, content, owner_id, created_date, update_date)
+        VALUES (NULL, :name, :url, '', :lId, sysdate(), sysdate())";
+$stmt = $pdo->prepare($sql);
 $stmt->bindValue(':name', $_POST["name"], PDO::PARAM_STR);
 $stmt->bindValue(':url', $_POST["url"], PDO::PARAM_STR);
-
+$stmt->bindValue(':lId', $_SESSION["id"], PDO::PARAM_INT);
 $status = $stmt->execute();
 
 if ($status == false) {
@@ -70,14 +67,11 @@ curl_close($ch);
 
 // 2-3. dog_ear_order の登録
 $pdoDogEarOrder = db_conn();
-$stmtDogEarOrder = $pdoDogEarOrder->prepare(
-    'INSERT INTO
-        gs_bm_order(id, `type`, book_id, `order`)
-    VALUES
-        (NULL, "dog_ear", :book_id, "[]")'
-);
-
+$sqlDogEarOrder = "INSERT INTO gs_bm_order(id, `type`, book_id, `order`, owner_id)
+                    VALUES (NULL, 'dog_ear', :book_id, '[]', :lId)";
+$stmtDogEarOrder = $pdoDogEarOrder->prepare($sqlDogEarOrder);
 $stmtDogEarOrder->bindValue(':book_id', $id, PDO::PARAM_INT);
+$stmtDogEarOrder->bindValue(':lId', $_SESSION["id"], PDO::PARAM_INT);
 $statusDogEarOrder = $stmtDogEarOrder->execute();
 if ($statusDogEarOrder == false) {
     sql_error($stmtDogEarOrder);

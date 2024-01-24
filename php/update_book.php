@@ -10,15 +10,8 @@ $pdo = db_conn();
 
 // 4．データ登録
 // 4-1. SQL文
-$stmt = $pdo->prepare(
-    "UPDATE
-        gs_bm_books
-    SET
-        $columnName = :change_val,
-        update_date = sysdate()
-    WHERE
-        id = :book_id"
-);
+$sql = "UPDATE gs_bm_books SET $columnName = :change_val, update_date = sysdate() WHERE id = :book_id";
+$stmt = $pdo->prepare($sql);
 
 // 4-2. バインド変数を定義
 $stmt->bindValue(':change_val', $_POST["change_val"], PDO::PARAM_STR);

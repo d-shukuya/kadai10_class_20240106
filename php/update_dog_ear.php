@@ -11,15 +11,8 @@ $pdo = db_conn();
 
 // 4．データ登録
 // 4-1. SQL文
-$stmt = $pdo->prepare(
-    "UPDATE
-        gs_bm_dog_ear
-    SET
-        $columnName = :change_val,
-        update_date = sysdate()
-    WHERE
-        id = :dog_ear_id"
-);
+$sql = "UPDATE gs_bm_dog_ear SET $columnName = :change_val, update_date = sysdate() WHERE id = :dog_ear_id";
+$stmt = $pdo->prepare($sql);
 
 // 4-2. バインド変数を定義
 $param = '';

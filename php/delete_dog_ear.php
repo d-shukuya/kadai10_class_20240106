@@ -11,12 +11,8 @@ $pdo = db_conn();
 
 // 3．データ登録
 // 3-1. SQL文
-$stmt = $pdo->prepare(
-    'DELETE FROM
-        gs_bm_dog_ear
-    WHERE
-        id = :dog_ear_id'
-);
+$sql = "DELETE FROM gs_bm_dog_ear WHERE id = :dog_ear_id";
+$stmt = $pdo->prepare($sql);
 
 // 3-2. バインド変数を定義
 $stmt->bindValue(':dog_ear_id', $dogEarId, PDO::PARAM_INT);

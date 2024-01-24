@@ -4,6 +4,10 @@ $(function () {
 });
 
 // イベント
+$('#logout').click(function() {
+  window.location.href = './php/logout.php';
+});
+
 $("#book_list").on("click", ".book_item", function () {
   const bookId = $(this).attr("id");
   window.location.href = `./php/book_detail.php?book_id=${bookId}`;
@@ -25,7 +29,7 @@ $("#book_list").sortable({
   stop: function (event, ui) {
     let ary = $(this).sortable("toArray");
     let order = [];
-    ary.forEach(ele => {
+    ary.forEach((ele) => {
       order.push(parseInt(ele, 10));
     });
 

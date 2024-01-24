@@ -6,13 +6,17 @@ function h($val)
 }
 
 //DB接続関数
+require __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
 function db_conn()
 {
     try {
-        $db_name = 'gs_bm_db2';
-        $db_id   = 'root';
-        $db_pw   = '';
-        $db_host = 'localhost';
+        $db_name = $_ENV['DB_NAME'];
+        $db_id   = $_ENV['DB_ID'];
+        $db_pw   = $_ENV['DB_pw'];
+        $db_host = $_ENV['DB_host'];
         return new PDO("mysql:dbname=$db_name;charset=utf8;host=$db_host", $db_id, $db_pw);
     } catch (PDOException $e) {
         exit('DB Connection Error:' . $e->getMessage());
@@ -46,3 +50,20 @@ $tagNameToDogEarTableColumn = array(
     'line_number' => 'line_number',
     'dog_ear_memo' => 'content',
 );
+
+function checkSession($location)
+{
+    if (!isset($_SESSION["chk_ssid"]) || !isset($_SESSION["id"]) || !isset($_SESSION["u_name"]) || $_SESSION["chk_ssid"] != session_id()) {
+        redirect("$location?err=session_err");
+    } else {
+        session_regenerate_id(true);
+        $_SESSION["chk_ssid"] = session_id();
+    }
+}
+
+function checkOwner($ownerId)
+{
+    if (!isset($_SESSION["id"]) || $_SESSION["id"] != $ownerId) {
+        redirect("../");
+    }
+}

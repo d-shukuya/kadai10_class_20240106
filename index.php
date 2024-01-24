@@ -1,6 +1,12 @@
 <?php
-// 1. funcs.php を呼び出す
+// 0. インポート
+session_start();
 include("./php/funcs.php");
+
+// 1. セッションチェック
+checkSession("./php/login.php");
+$lId = $_SESSION["id"];
+$lName = $_SESSION["u_name"];
 
 // 2. DB接続
 $pdoOrder = db_conn();
@@ -8,17 +14,20 @@ $pdoBooks = db_conn();
 
 // 3. データ取得
 // 3-1. order
-$stmtOrder = $pdoOrder->prepare('SELECT `order` FROM gs_bm_order WHERE `type` = "books"');
+$sqlOrder = "SELECT `order` FROM gs_bm_order WHERE type = 'books' AND owner_id = $lId";
+$stmtOrder = $pdoOrder->prepare($sqlOrder);
 $statusOrder = $stmtOrder->execute();
 if ($statusOrder == false) {
     sql_error($stmtOrder);
 } else {
     $resultOrder = $stmtOrder->fetch(PDO::FETCH_ASSOC);
-    $orderAry = json_decode($resultOrder['order'], true);
+    $orderJSON = $resultOrder['order'];
+    $orderAry = json_decode($orderJSON, true);
 }
 
 // 3-2. books
-$stmtBooks = $pdoBooks->prepare('SELECT * FROM gs_bm_books');
+$sqlBooks = "SELECT * FROM gs_bm_books WHERE owner_id = $lId";
+$stmtBooks = $pdoBooks->prepare($sqlBooks);
 $statusBooks = $stmtBooks->execute();
 $view = "";
 $resAry = array();
@@ -28,12 +37,13 @@ if ($statusBooks == false) {
     while ($resultBooks = $stmtBooks->fetch(PDO::FETCH_ASSOC)) {
         $resAry[$resultBooks['id']] = $resultBooks;
     }
-    for ($i=0; $i < count($orderAry); $i++) { 
+    for ($i = 0; $i < count($orderAry); $i++) {
         $view = createView($resAry[$orderAry[$i]], $view);
     }
 }
 
-function createView($result, $view){
+function createView($result, $view)
+{
     $id12 = str_pad($result['id'], 12, "0", STR_PAD_LEFT);
     $files = glob("./book_cover/$id12.*");
     $coverImgPath = (count($files) > 0) ? $files[0] : './book_cover/sample_cover.png';
@@ -68,6 +78,11 @@ function createView($result, $view){
 
 <body>
     <header>
+        <div id="account_box">
+            <p>アカウント：</p>
+            <div id="account_name"><?= h($lName) ?></div>
+            <button id="logout">ログアウト</button>
+        </div>
         <img src="./img/logo.png" alt="">
         <h1>DogEarApp.</h1>
     </header>
@@ -83,7 +98,7 @@ function createView($result, $view){
                     <div id="book_url" class="textbox_fmt"><input class="input_textbox" type="text" name="url"></div>
                     <div id="book_cover_box"><img id="book_cover_img" src="./img/input_img.png" alt=""></div>
                     <input type="file" id="img_upload" accept="image/*" name="book_cover_img">
-                    <input type="hidden" id="books_order" name="books_order" value="<?= h($resultOrder['order']) ?>">
+                    <input type="hidden" id="books_order" name="books_order" value="<?= h($orderJSON) ?>">
                     <div id="book_register_btn"><input class="button" type="submit" value="登録"></div>
                 </div>
             </fieldset>

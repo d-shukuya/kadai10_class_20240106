@@ -1,5 +1,6 @@
 <?php
-// 1. funcs.php を呼び出す
+// 1. インポート
+session_start();
 include("./funcs.php");
 
 // 2. 変数定義
@@ -8,15 +9,11 @@ $bookId = $_POST["book_id"];
 // 3．データ登録
 // 3-1. dogEar の登録
 $pdo = db_conn();
-$stmt = $pdo->prepare(
-  "INSERT INTO
-    gs_bm_dog_ear(id, book_id, page_number, line_number, content, created_date, update_date)
-  VALUES(
-    NULL, :bookId, '', '', '', sysdate(), sysdate()
-  )"
-);
+$sql = "INSERT INTO gs_bm_dog_ear(id, book_id, page_number, line_number, content, owner_id, created_date, update_date)
+        VALUES(NULL, :bookId, '', '', '', :lId, sysdate(), sysdate())";
+$stmt = $pdo->prepare($sql);
 $stmt->bindValue(':bookId', $bookId, PDO::PARAM_INT);
-
+$stmt->bindValue(':lId', $_SESSION["id"], PDO::PARAM_INT);
 $status = $stmt->execute();
 if ($status == false) {
   sql_error($stmt);
