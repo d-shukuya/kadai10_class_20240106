@@ -79,9 +79,9 @@ function createView($result, $view)
 <body>
     <header>
         <div id="account_box">
-            <p>アカウント：</p>
+            <p>user：</p>
             <div id="account_name"><?= h($lName) ?></div>
-            <button id="logout">ログアウト</button>
+            <button id="logout">Logout</button>
         </div>
         <img src="./img/logo.png" alt="">
         <h1>DogEarApp.</h1>
