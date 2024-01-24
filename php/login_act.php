@@ -6,10 +6,9 @@ $lId = $_POST['l_id'];
 $lPw = $_POST['l_pw'];
 
 $pdo = db_conn();
-$sql = 'SELECT * FROM gs_bm_user WHERE u_id=:lId AND u_pw=:lPw';
+$sql = 'SELECT * FROM gs_bm_user WHERE u_id=:lId AND life_flg=1';
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':lId', $lId, PDO::PARAM_STR);
-$stmt->bindValue(':lPw', $lPw, PDO::PARAM_STR);
 $status = $stmt->execute();
 
 if ($status == false) {
@@ -18,7 +17,7 @@ if ($status == false) {
 
 $val = $stmt->fetch();
 
-if ($val["id"] != "") {
+if ($val["id"] != "" && password_verify($lPw, $val["u_pw"])) {
     $_SESSION["chk_ssid"] = session_id();
     $_SESSION["id"] = $val["id"];
     $_SESSION["u_name"] = $val["u_name"];
