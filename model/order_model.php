@@ -14,6 +14,18 @@ class OrderModel
     }
 
     // CREATE
+    public function createBooks($ownerId)
+    {
+        $sql = "INSERT INTO gs_bm_order(id, `type`, book_id, `order`, owner_id)
+                    VALUES (NULL, 'books', NULL, '[]', :owner_id)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':owner_id', $ownerId, PDO::PARAM_INT);
+        $status = $stmt->execute();
+        if ($status == false) {
+            $this->dbUtil->sql_error($stmt);
+        }
+    }
+
     public function createDogEar($bookId, $ownerId)
     {
         $sql = "INSERT INTO gs_bm_order(id, `type`, book_id, `order`, owner_id)

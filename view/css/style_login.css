@@ -44,7 +44,7 @@ fieldset{
 
 .login{
   position: absolute;
-  top: calc(50% - 75px);
+  top: calc(50% - 90px);
   left: calc(50% - 50px);
   height: 150px;
   width: 350px;
@@ -94,11 +94,13 @@ fieldset{
   margin-top: 10px;
 }
 
-.login input[type=submit]:hover{
+.login input[type=submit]:hover,
+#register:hover{
   opacity: 0.8;
 }
 
-.login input[type=submit]:active{
+.login input[type=submit]:active,
+#register:active{
   opacity: 0.6;
 }
 
@@ -112,7 +114,8 @@ fieldset{
   border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=submit]:focus{
+.login input[type=submit]:focus,
+#register:focus{
   outline: none;
 }
 
@@ -122,6 +125,28 @@ fieldset{
 
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
+}
+
+#register{
+  position: absolute;
+  top: calc(50% + 55px);
+  left: calc(50% - 18px);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 15px;
+  background: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 20px;
+  color: #a18d6c;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px;
+  margin-top: 10px;
 }
 
 #err_message {

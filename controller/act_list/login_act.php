@@ -9,7 +9,7 @@ require_once __DIR__ . '/../util_class.php';
 $lId = $_POST['l_id'];
 $lPw = $_POST['l_pw'];
 
-// 2. gs_bm_user テーブルを参照
+// 2. データ参照
 $topDirPath = '../..';
 $userModel = new UserModel($topDirPath);
 $val = $userModel->readRecord($lId);

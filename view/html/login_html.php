@@ -23,7 +23,12 @@
             </div>
         </fieldset>
     </form>
+    <div id="register">Register</div>
     <p id="err_message"><?=$errMessage?></p>
+
+    <!-- JSの読み込み -->
+    <script src="../view/js/jquery-2.1.3.min.js"></script>
+    <script src="../view/js/script_login.js"></script>
 </body>
 
 </html>
