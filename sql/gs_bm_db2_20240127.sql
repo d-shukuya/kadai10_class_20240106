@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2024-01-24 18:01:21
+-- 生成日時: 2024-01-26 20:20:01
 -- サーバのバージョン： 10.4.32-MariaDB
 -- PHP のバージョン: 8.2.12
 
@@ -100,7 +100,7 @@ CREATE TABLE `gs_bm_order` (
 --
 
 INSERT INTO `gs_bm_order` (`id`, `type`, `book_id`, `order`, `owner_id`) VALUES
-(1, 'books', NULL, '[21,22]', 1),
+(1, 'books', NULL, '[22,21]', 1),
 (2, 'dog_ear', 23, '[48,46,47,49,50,51]', 2),
 (9, 'dog_ear', 21, '[40,41,42]', 1),
 (10, 'dog_ear', 22, '[44,43,45]', 1),
@@ -127,9 +127,9 @@ CREATE TABLE `gs_bm_user` (
 --
 
 INSERT INTO `gs_bm_user` (`id`, `u_name`, `u_id`, `u_pw`, `life_flg`, `created_date`) VALUES
-(1, 'test01', 'test01', 'test01', 1, '2024-01-23 21:16:31'),
-(2, 'test02', 'test02', 'test02', 1, '2024-01-23 21:16:31'),
-(3, 'test03', 'test03', 'test03', 1, '2024-01-23 21:16:31');
+(1, 'test01', 'test01', '$2y$10$QWaOkXbGbrzzaDCin5SwZOA.eqDeVD6ifcvnT2aWet1r9E03dcXQG', 1, '2024-01-23 21:16:31'),
+(2, 'test02', 'test02', '$2y$10$nyJllO8OVuAzBtOhIq7UzOHCaxrR39wIGRpmq1H0BEXM5ZvfHCym.', 1, '2024-01-23 21:16:31'),
+(3, 'test03', 'test03', '$2y$10$R2BMsv3IOgfKh7PYKoSaK.bxA5qsP/H98NKIuYOwTHnOJZadvqx2i', 1, '2024-01-23 21:16:31');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -167,19 +167,19 @@ ALTER TABLE `gs_bm_user`
 -- テーブルの AUTO_INCREMENT `gs_bm_books`
 --
 ALTER TABLE `gs_bm_books`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- テーブルの AUTO_INCREMENT `gs_bm_dog_ear`
 --
 ALTER TABLE `gs_bm_dog_ear`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- テーブルの AUTO_INCREMENT `gs_bm_order`
 --
 ALTER TABLE `gs_bm_order`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- テーブルの AUTO_INCREMENT `gs_bm_user`
