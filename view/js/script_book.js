@@ -5,12 +5,12 @@ $(function () {
 
 // イベント
 $('#logout').click(function() {
-  window.location.href = './php/logout.php';
+  window.location.href = '../controller/act_list/logout_act.php';
 });
 
 $("#book_list").on("click", ".book_item", function () {
   const bookId = $(this).attr("id");
-  window.location.href = `./php/book_detail.php?book_id=${bookId}`;
+  window.location.href = `./dog_ear.php?book_id=${bookId}`;
 });
 
 $("#book_cover_box").on("click", "#book_cover_img", function () {
@@ -42,7 +42,7 @@ $("#book_list").sortable({
 // 関数
 function postUpdateBooksOrder(order) {
   $.ajax({
-    url: "./php/update_order.php",
+    url: "../controller/act_list/update_order.php",
     type: "post",
     data: {
       type: "books",

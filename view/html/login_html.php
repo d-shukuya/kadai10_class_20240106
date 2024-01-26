@@ -1,18 +1,3 @@
-<?php
-$errMessage = "";
-if (isset($_GET["err"])) {
-    switch ($_GET["err"]) {
-        case 'login_err':
-            $errMessage = "username または password が違います。";
-            break;
-
-        case 'session_err':
-            $errMessage = "ログインしてください。";
-            break;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -20,14 +5,14 @@ if (isset($_GET["err"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DogEarApp.</title>
-    <link rel="stylesheet" href="../css/style_login.css">
+    <link rel="stylesheet" href="../view/css/style_login.css">
 </head>
 
 <body>
-    <form action="./login_act.php" method="post">
+    <form action="../controller/act_list/login_act.php" method="post">
         <div class="grad"></div>
         <div class="header">
-            <img src="../img/logo.png" alt="">
+            <img src="../view/img/logo.png" alt="">
         </div>
         <br>
         <fieldset>

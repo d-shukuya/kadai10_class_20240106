@@ -1,6 +1,7 @@
 <?php
+// 0. インポート
 session_start();
-include("./funcs.php");
+require_once __DIR__ . '/../util_class.php';
 
 // SESSION を初期化
 $_SESSION = array();
@@ -12,5 +13,5 @@ if (isset($_COOKIE[session_name()])) {
 
 // サーバ側でのセッションIDの破棄
 session_destroy();
-redirect('./login.php');
+Util::redirect('../login.php');
 exit();
