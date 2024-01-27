@@ -38,9 +38,9 @@ class BooksModel
     }
 
     // READ
-    public function readRecordByIdAndLoginId($id, $lId)
+    public function readRecordByIdAndLoginId($id, $ownerId)
     {
-        $sql = "SELECT * FROM gs_bm_books WHERE id = $id AND owner_id = $lId";
+        $sql = "SELECT * FROM gs_bm_books WHERE id = $id AND owner_id = $ownerId";
         $stmt = $this->pdo->prepare($sql);
         $status = $stmt->execute();
         if ($status == false) {
@@ -50,9 +50,9 @@ class BooksModel
         }
     }
 
-    public function readRecordByLoginId($lId)
+    public function readRecordByOwnerId($ownerId)
     {
-        $sql = "SELECT * FROM gs_bm_books WHERE owner_id = $lId";
+        $sql = "SELECT * FROM gs_bm_books WHERE owner_id = $ownerId";
         $stmt = $this->pdo->prepare($sql);
         $status = $stmt->execute();
         $resAry = array();
@@ -84,8 +84,6 @@ class BooksModel
             $new_name = "$bookId.$extension";
             move_uploaded_file($tmp_name, $this->bookCoverDir . "/$new_name");
         } else {
-            echo 'bb';
-            exit;
             echo "Failed to save img file";
         }
     }
@@ -116,6 +114,24 @@ class BooksModel
     public function deleteRecord($bookId): void
     {
         $sql = "DELETE FROM gs_bm_books WHERE id = $bookId";
+        $stmt = $this->pdo->prepare($sql);
+        $status = $stmt->execute();
+        if ($status == false) {
+            $this->dbUtil->sql_error($stmt);
+        }
+    }
+
+    public function deleteAllByOwnerId($ownerId): void
+    {
+        // bookCover を削除
+        $books = $this->readRecordByOwnerId($ownerId);
+        foreach ($books as $key => $value) {
+            $paddedNumber = str_pad($key, 12, '0', STR_PAD_LEFT);
+            $this->deleteBookCoverFile($paddedNumber);
+        }
+
+        // book を削除
+        $sql = "DELETE FROM gs_bm_books WHERE owner_id = $ownerId";
         $stmt = $this->pdo->prepare($sql);
         $status = $stmt->execute();
         if ($status == false) {

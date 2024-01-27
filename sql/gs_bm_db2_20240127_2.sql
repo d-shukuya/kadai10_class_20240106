@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2024-01-26 20:20:01
+-- 生成日時: 2024-01-27 04:12:07
 -- サーバのバージョン： 10.4.32-MariaDB
 -- PHP のバージョン: 8.2.12
 
@@ -104,8 +104,7 @@ INSERT INTO `gs_bm_order` (`id`, `type`, `book_id`, `order`, `owner_id`) VALUES
 (2, 'dog_ear', 23, '[48,46,47,49,50,51]', 2),
 (9, 'dog_ear', 21, '[40,41,42]', 1),
 (10, 'dog_ear', 22, '[44,43,45]', 1),
-(13, 'books', NULL, '[23]', 2),
-(15, 'books', NULL, '[]', 3);
+(13, 'books', NULL, '[23]', 2);
 
 -- --------------------------------------------------------
 
@@ -128,8 +127,7 @@ CREATE TABLE `gs_bm_user` (
 
 INSERT INTO `gs_bm_user` (`id`, `u_name`, `u_id`, `u_pw`, `life_flg`, `created_date`) VALUES
 (1, 'test01', 'test01', '$2y$10$QWaOkXbGbrzzaDCin5SwZOA.eqDeVD6ifcvnT2aWet1r9E03dcXQG', 1, '2024-01-23 21:16:31'),
-(2, 'test02', 'test02', '$2y$10$nyJllO8OVuAzBtOhIq7UzOHCaxrR39wIGRpmq1H0BEXM5ZvfHCym.', 1, '2024-01-23 21:16:31'),
-(3, 'test03', 'test03', '$2y$10$R2BMsv3IOgfKh7PYKoSaK.bxA5qsP/H98NKIuYOwTHnOJZadvqx2i', 1, '2024-01-23 21:16:31');
+(2, 'test02', 'test02', '$2y$10$nyJllO8OVuAzBtOhIq7UzOHCaxrR39wIGRpmq1H0BEXM5ZvfHCym.', 1, '2024-01-23 21:16:31');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -167,25 +165,25 @@ ALTER TABLE `gs_bm_user`
 -- テーブルの AUTO_INCREMENT `gs_bm_books`
 --
 ALTER TABLE `gs_bm_books`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- テーブルの AUTO_INCREMENT `gs_bm_dog_ear`
 --
 ALTER TABLE `gs_bm_dog_ear`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- テーブルの AUTO_INCREMENT `gs_bm_order`
 --
 ALTER TABLE `gs_bm_order`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- テーブルの AUTO_INCREMENT `gs_bm_user`
 --
 ALTER TABLE `gs_bm_user`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

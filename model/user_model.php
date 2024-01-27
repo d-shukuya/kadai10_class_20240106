@@ -60,6 +60,17 @@ class UserModel
         return $stmt->fetchColumn() == 0;
     }
 
+    // DELETE
+    public function deleteRecord($ownerId)
+    {
+        $sql = "DELETE FROM gs_bm_user WHERE id = $ownerId";
+        $stmt = $this->pdo->prepare($sql);
+        $status = $stmt->execute();
+        if ($status == false) {
+            $this->dbUtil->sql_error($stmt);
+        }
+    }
+
     // その他関数
     public function checkPassword($lPw, $val): bool
     {

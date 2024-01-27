@@ -4,6 +4,7 @@ session_start();
 require_once __DIR__ . '/../../Model/books_model.php';
 require_once __DIR__ . '/../../Model/dog_ear_model.php';
 require_once __DIR__ . '/../../Model/order_model.php';
+require_once __DIR__ . '/../../Model/user_model.php';
 require_once __DIR__ . '/../util_class.php';
 
 // 1. チェック
@@ -14,26 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // 2. 変数定義
-$bookId = $_POST['book_id'];
-$booksOrder = $_POST['books_order'];
 $lId = $_SESSION['id'];
 
 // 3. データ削除
-// bookCover
+// books & bookCover
 $booksModel = new BooksModel();
-$booksModel->deleteBookCoverFile($bookId);
+$booksModel->deleteAllByOwnerId($lId);
 
-// booksOrder（更新）
-$removedOrderJSON = Util::removeIdFromAry($booksOrder, $bookId);
+// order
 $orderModel = new OrderModel();
-$orderModel->updateRecord($removedOrderJSON, 'books', $lId, $bookId);
-
-// dogEarOrder
-$orderModel->deleteDogEarOrder($bookId);
-
-// book
-$booksModel->deleteRecord($bookId);
+$orderModel->deleteAllByOwnerId($lId);
 
 // dog_ear
 $dogEarModel = new DogEarModel();
-$dogEarModel->deleteRecordByBookId($bookId);
+$dogEarModel->deleteAllByOwnerId($lId);
+
+// user
+$userModel = new UserModel();
+$newId = $userModel->deleteRecord($lId);
+
+// 4. セッションを削除
+$_SESSION = array();
+if (isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), '', time() - 42000, '/');
+}
+session_destroy();

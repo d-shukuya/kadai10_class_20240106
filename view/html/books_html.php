@@ -20,9 +20,10 @@ $hOrderColumnJSON = h($orderColumnJSON);
 <body>
     <header>
         <div id="account_box">
-            <p>user：</p>
+            <p id="user_label">user：</p>
             <div id="account_name"><?= $hLName ?></div>
             <button id="logout">Logout</button>
+            <p id="delete_user">削除</p>
         </div>
         <img src="../view/img/logo.png" alt="">
         <h1>DogEarApp.</h1>

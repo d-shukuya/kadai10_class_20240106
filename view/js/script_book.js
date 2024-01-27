@@ -4,8 +4,26 @@ $(function () {
 });
 
 // イベント
-$('#logout').click(function() {
-  window.location.href = '../controller/act_list/logout_act.php';
+$("#logout").click(function () {
+  window.location.href = "../controller/act_list/logout_act.php";
+});
+
+$("#delete_user").on("click", function () {
+  if (confirm("本当に削除しますか？")) {
+    $.ajax({
+      url: "../controller/act_list/delete_user.php",
+      type: "post",
+      data: {},
+      success: function (response) {
+        console.log(response);
+        window.location.href = "../";
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus + ": " + errorThrown);
+        window.location.href = "../";
+      },
+    });
+  }
 });
 
 $("#book_list").on("click", ".book_item", function () {

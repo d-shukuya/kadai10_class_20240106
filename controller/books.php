@@ -18,7 +18,7 @@ $resOrder = $orderModel->readRecordByTypeAndOwnerId('books', $lId);
 
 // 2-2. Books
 $booksModel = new BooksModel();
-$resBooks = $booksModel->readRecordByLoginId($lId);
+$resBooks = $booksModel->readRecordByOwnerId($lId);
 
 // 3. HTML 用のデータの作成
 $orderColumnJSON = $resOrder['order'];

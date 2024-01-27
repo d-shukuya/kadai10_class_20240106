@@ -1,7 +1,6 @@
 <?php
 // 0. インポート
 session_start();
-require_once __DIR__ . '/../../Model/db_util.php';
 require_once __DIR__ . '/../../Model/user_model.php';
 require_once __DIR__ . '/../util_class.php';
 

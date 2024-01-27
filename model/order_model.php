@@ -95,4 +95,14 @@ class OrderModel
             $this->dbUtil->sql_error($stmt);
         }
     }
+
+    public function deleteAllByOwnerId($ownerId)
+    {
+        $sql = "DELETE FROM gs_bm_order WHERE owner_id = $ownerId";
+        $stmt = $this->pdo->prepare($sql);
+        $status = $stmt->execute();
+        if ($status == false) {
+            $this->dbUtil->sql_error($stmt);
+        }
+    }
 }

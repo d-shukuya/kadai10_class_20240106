@@ -78,4 +78,14 @@ class DogEarModel
             $this->dbUtil->sql_error($stmt);
         }
     }
+
+    public function deleteAllByOwnerId($ownerId)
+    {
+        $sql = "DELETE FROM gs_bm_dog_ear WHERE owner_id = $ownerId";
+        $stmt = $this->pdo->prepare($sql);
+        $status = $stmt->execute();
+        if ($status == false) {
+            $this->dbUtil->sql_error($stmt);
+        }
+    }
 }

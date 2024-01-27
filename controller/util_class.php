@@ -18,8 +18,6 @@ class Util
     //リダイレクト関数
     public static function redirect($fileName): void
     {
-        // echo $fileName;
-        // exit;
         header("Location: $fileName");
         exit();
     }
@@ -48,7 +46,7 @@ class Util
     // ログインユーザーがオーナーのレコードかをチェック
     public static function checkOwner($res)
     {
-        if (!isset($res["id"]) || $res["owner_id"] !== $_SESSION["id"]) {
+        if (!isset($res["id"]) || $res["owner_id"] != $_SESSION["id"]) {
             Util::redirect('../');
         }
     }
