@@ -1,7 +1,7 @@
 <?php
 // 0. インポート
 session_start();
-require_once __DIR__ . '/../../Model/books_model.php';
+require_once __DIR__ . '/../../model/books_model.php';
 
 // 1. チェック
 Util::checkSession('..');

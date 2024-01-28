@@ -36,7 +36,7 @@ $("#img_upload").on("change", function (e) {
   formData.append("book_id", $(this).data("book_id"));
 
   $.ajax({
-    url: "../controller/act_list/update_book_cover_file.php",
+    url: "./act_list/update_book_cover_file.php",
     type: "POST",
     data: formData,
     processData: false,
@@ -94,7 +94,7 @@ $("#book_delete_btn").on("click", function () {
     const encodedData = $.param(data);
 
     $.ajax({
-      url: "../controller/act_list/delete_book.php",
+      url: "./act_list/delete_book.php",
       type: "post",
       data: encodedData,
       success: function (response) {
@@ -128,16 +128,16 @@ $(".dog_ear_item").on("click", ".delete_dog_ear", function () {
     const encodedData = $.param(data);
 
     $.ajax({
-      url: "../controller/act_list/delete_dog_ear.php",
+      url: "./act_list/delete_dog_ear.php",
       type: "post",
       data: encodedData,
       success: function (response) {
         console.log(response);
-        window.location.href = `../controller/dog_ear.php?book_id=${bookId}`;
+        window.location.href = `./dog_ear.php?book_id=${bookId}`;
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus + ": " + errorThrown);
-        window.location.href = `../controller/dog_ear.php?book_id=${bookId}`;
+        window.location.href = `./dog_ear.php?book_id=${bookId}`;
       },
     });
   }
@@ -161,7 +161,7 @@ $("#dog_ear_list").sortable({
 // 関数
 function postUpdateBooks(type, changeVal, bookId) {
   $.ajax({
-    url: "../controller/act_list/update_book.php",
+    url: "./act_list/update_book.php",
     type: "post",
     data: {
       type: type,
@@ -179,7 +179,7 @@ function postUpdateBooks(type, changeVal, bookId) {
 
 function postUpdateDogEar(type, changeVal, dogEarId) {
   $.ajax({
-    url: "../controller/act_list/update_dog_ear.php",
+    url: "./act_list/update_dog_ear.php",
     type: "post",
     data: {
       type: type,
@@ -197,7 +197,7 @@ function postUpdateDogEar(type, changeVal, dogEarId) {
 
 function postUpdateDogEarOrder(order, bookId) {
   $.ajax({
-    url: "../controller/act_list/update_order.php",
+    url: "./act_list/update_order.php",
     type: "post",
     data: {
       type: "dog_ear",

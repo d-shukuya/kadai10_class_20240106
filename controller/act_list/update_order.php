@@ -1,7 +1,7 @@
 <?php
 // 0. インポート
 session_start();
-require_once __DIR__ . '/../../Model/order_model.php';
+require_once __DIR__ . '/../../model/order_model.php';
 require_once __DIR__ . '/../util_class.php';
 
 // 1. チェック

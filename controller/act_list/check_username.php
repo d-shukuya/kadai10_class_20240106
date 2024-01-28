@@ -1,6 +1,6 @@
 <?php
 // 0. インポート
-require_once __DIR__ . '/../../Model/user_model.php';
+require_once __DIR__ . '/../../model/user_model.php';
 
 // 1. 変数定義
 $uName = $_POST['u_name'];

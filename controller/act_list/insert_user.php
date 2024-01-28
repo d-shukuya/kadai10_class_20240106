@@ -1,8 +1,8 @@
 <?php
 // 0. インポート
 session_start();
-require_once __DIR__ . '/../../Model/user_model.php';
-require_once __DIR__ . '/../../Model/order_model.php';
+require_once __DIR__ . '/../../model/user_model.php';
+require_once __DIR__ . '/../../model/order_model.php';
 
 // 1. POST データの格納
 $uName = $_POST['u_name'];

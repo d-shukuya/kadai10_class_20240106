@@ -1,10 +1,10 @@
 <?php
 // 0. インポート
 session_start();
-require_once __DIR__ . '/../../Model/books_model.php';
-require_once __DIR__ . '/../../Model/dog_ear_model.php';
-require_once __DIR__ . '/../../Model/order_model.php';
-require_once __DIR__ . '/../../Model/user_model.php';
+require_once __DIR__ . '/../../model/books_model.php';
+require_once __DIR__ . '/../../model/dog_ear_model.php';
+require_once __DIR__ . '/../../model/order_model.php';
+require_once __DIR__ . '/../../model/user_model.php';
 require_once __DIR__ . '/../util_class.php';
 
 // 1. チェック
