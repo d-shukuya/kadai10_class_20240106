@@ -63,9 +63,9 @@ function checkFormat(uName, pw) {
 }
 
 function checkDuplication(uName) {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     $.ajax({
-      url: "../controller/act_list/check_username.php",
+      url: "./act_list/check_username.php",
       type: "POST",
       data: { u_name: uName },
       success: function (res) {
@@ -81,9 +81,9 @@ function checkDuplication(uName) {
 }
 
 function createUser(uName, pw) {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     $.ajax({
-      url: "../controller/act_list/insert_user.php",
+      url: "./act_list/insert_user.php",
       type: "POST",
       data: { u_name: uName, pw: pw },
       success: function (res) {
